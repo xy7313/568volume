@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<title>hw5-volume</title>
+	<meta charset="utf-8">
+	<meta>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+	<div class="container">
+	  <div>
+	  	<div class="page-header">
+	  		<h1>Caculate the Volume</h1> 
+	  	</div>   
+	  	<p>This webpate will calculate the <mark>volume</mark> for a Cylinder, Sphere or Cone.</p>
+	  </div>
+	  
+	  <div>
+	  	
+	  </div>
+
+	<div class="list-group">
+ 		<lable class = "list-group-item" >Select the units(English or SI)
+	 		<form id = "units">
+				<input type="radio" name="units" value="eng" checked="checked" /> Englis
+				<input type="radio" name="units" value="si" /> SI
+			</form>	
+  		</lable>
+  		<lable class = "list-group-item" for = "shape">Select the shape:
+	 		<form>			
+				<select name="shape" id="shape">
+				<option value="cone">cone</option>
+				<option value="sphere">sphere</option>
+				<option value="cylinder">cylinder</option>
+				</select>
+			</form>
+  		</lable>
+  		<lable class = "list-group-item" for = "radius">Enter the radius
+	 		<form name="input" action="#" method="get">
+	  			<input type="text" id="radius" />
+			</form>
+  		</lable>
+  		<lable class = "list-group-item" for = "height">For cone and cylinder, enter the height
+	 		<form name="input" action="#" method="get">
+	  			<input type="text" id="height" />
+			</form>
+  		</lable>
+  		<div class = "list-group-item">
+  			<button type="button" class="btn btn-primary" id="submit">Confirm</button>
+			<button type="button" class="btn btn-primary" onclick="clean()">Reset the form</button>
+  		</div>
+	</div>
+
+
+
+	<div>
+	  Result:
+	  you selected to use:
+	  you seleted to find the values for :
+	  <div class="table-responsive">
+	   	<table class="table table-hover" id="border">
+	    <thead>
+	      <tr>
+	        <th>Radius</th>
+	        <th>Height</th>
+	        <th>Shape</th>
+	        <th>Volume</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr>
+	        <td>10</td>
+	        <td>20</td>
+	        <td>cylinder</td>
+	        <td>6280(example)</td>
+	      </tr>
+	       <tr>
+	        <td>add radius</td>
+	        <td>add height</td>
+	        <td>add shape</td>
+	        <td>calculate volume</td>
+	      </tr>
+	     
+	    </tbody>
+	  	</table>
+	  	<button type="button" class="btn btn-primary" onclick="Volume()">calculate the results</button>
+	  </div>
+	</div>
+
+	<div class="alert alert-success fade in">
+	    <a href="#" class="close" data-dismiss="alert" aria-label="close"></a>
+	    <strong>Success!</strong> Made by Xiaolu Yang
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	document.getElementById("submit").onclick = function(){
+	
+	document.getElementById("border").rows[2].cells[3].innerText = "calculate volume";
+
+	var radiusElement=document.getElementById("radius"); 
+	var heightElement=document.getElementById("height"); 
+	var shapeElement=document.getElementById("shape"); 
+
+		console.log(shapeElement.value);
+
+
+	document.getElementById("border").rows[2].cells[0].innerText = radiusElement.value;
+	document.getElementById("border").rows[2].cells[1].innerText = heightElement.value;
+	document.getElementById("border").rows[2].cells[2].innerText = shapeElement.value;
+
+
+	// //创建表格节点 
+	// var trNode=document.createElement("tr"); 
+	// var radiusNode=document.createElement("td"); 
+	// var heightNode=document.createElement("td"); 
+	// var shapeNode=document.createElement("td"); 
+
+	// //向表格中添加创建的节点及文本内容 
+	// var borderElement=document.getElementById("border"); 
+	// borderElement.appendChild(trNode); 
+	// trNode.appendChild(radiusNode); 
+	// trNode.appendChild(heightNode); 
+	// trNode.appendChild(shapeNode); 
+	// var radiustextNode=document.createTextNode(radiusElement.value); 
+	// var heighttextNode=document.createTextNode(heightElement.value); 
+	// var shapetextNode=document.createTextNode(shapeElement.value); 
+	// radiusNode.appendChild(radiustextNode); 
+	// heightNode.appendChild(heighttextNode); 
+	// shapeNode.appendChild(shapetextNode); 
+
+
+
+}
+function clean()
+{
+ document.getElementById("radius").value="";
+ document.getElementById("height").value="";
+ document.getElementById("shape").value="";
+ document.getElementById("units").value="eng";
+}
+
+function Volume(){
+	var radiusElement=document.getElementById("radius"); 
+	//console.log(radiusElement.value);
+	var heightElement=document.getElementById("height"); 
+	var shapeElement=document.getElementById("shape"); 
+	var pai = 3.14;
+	var volumeElement;
+
+	console.log(shapeElement.value);
+	if(shapeElement.value == "cone"){
+		console.log(radiusElement.value);
+		volumeElement=(radiusElement.value*radiusElement.value*pai*heightElement.value)/3;
+		console.log(volumeElement);
+	}
+
+	else if(shapeElement.value == "cylinder"){
+		volumeElement=(heightElement.value * pai * (radiusElement.value * radiusElement.value));
+		console.log(volumeElement);
+	}
+
+	else if(shapeElement.value == "sphere"){		
+		volumeElement=((radiusElement.value^3)*pai*heightElement.value)*4/3;
+		console.log(volumeElement);
+
+	}
+	
+	//var volumetextNode=document.createTextNode(volumeElement); 
+	document.getElementById("border").rows[2].cells[3].innerText = volumeElement;
+	// document.getElementById('volume').innerHTML=volumeElement.value;
+	// document.getElementById('out').value=volumeElement.value;
+
+}
+
+
+
+
+
+</script>
+</body>
+</html>
